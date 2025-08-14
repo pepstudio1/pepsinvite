@@ -205,7 +205,8 @@ function initLightboxEvents() {
 // Countdown Timer
 function initCountdown() {
     // Set wedding date (ubah sesuai tanggal acara)
-    const weddingDate = new Date('2024-06-15T08:00:00').getTime();
+    const weddingDate = new Date('2025
+                                 -06-15T08:00:00').getTime();
     
     function updateCountdown() {
         const now = new Date().getTime();
