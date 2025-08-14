@@ -7,7 +7,7 @@ let isPlaying = false;
 const galleryData = [
     {
         src: '1.jpg',
-        alt: 'Foto Pre-wedding 1'
+        alt: 'Foto Pre-wedding 1w=500h=500&fit=crop=center'
     },
     {
         src: '2.jpg',
