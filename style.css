@@ -1,232 +1,703 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Digital - Pepsinvite</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <!-- Music Control -->
-    <div class="music-control" id="musicControl">
-        <i class="fas fa-music" id="musicIcon"></i>
-    </div>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="invitation-header">
-                <h1 class="invitation-title">Undangan Pernikahan</h1>
-                <div class="couple-names">
-                    <span class="bride-name" id="brideName">Triska</span>
-                    <span class="ampersand">&</span>
-                    <span class="groom-name" id="groomName">Vicky</span>
-                </div>
-                <div class="wedding-date">
-                    <p>Sabtu, 15 Juni 2026</p>
-                    <p>Pukul 08.00 WIB</p>
-                </div>
-                <div class="guest-name">
-                    <p>Kepada Yth.</p>
-                    <h2 id="guestName">Nama Tamu</h2>
-                </div>
-            </div>
-            <button class="open-invitation" onclick="openInvitation()">
-                Buka Undangan
-            </button>
-        </div>
-    </section>
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #2C3E50;
+    overflow-x: hidden;
+}
 
-    <!-- Main Content -->
-    <div class="main-content" id="mainContent">
-        <!-- Couple Section -->
-        <section class="couple-section">
-            <div class="container">
-                <h2 class="section-title">Mempelai</h2>
-                <div class="couple-info">
-                    <div class="bride-info">
-                        <div class="couple-photo">
-                            <img src="1jpg" alt="Foto Mempelai Wanita" id="groomPhoto">
-                        </div>
-                        <h3 id="brideFullName">Triska Ayu Permadani</h3>
-                        <p>Putri dari</p>
-                        <p>Bapak Senen & Ibu Sugiyarti</p>
-                    </div>
-                    <div class="couple-divider">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="groom-info">
-                        <div class="couple-photo">
-                            <img src="https://via.placeholder.com/200x200" alt="Foto Mempelai Pria" id="groomPhoto">
-                        </div>
-                        <h3 id="groomFullName">Vicky Wahyu Parmadi</h3>
-                        <p>Putra dari</p>
-                        <p>Bapak Sugimin & Ibu Parinem</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-        <!-- Event Details -->
-        <section class="event-section">
-            <div class="container">
-                <h2 class="section-title">Detail Acara</h2>
-                <div class="event-details">
-                    <div class="event-item">
-                        <div class="event-icon">
-                            <i class="fas fa-ring"></i>
-                        </div>
-                        <div class="event-info">
-                            <h3>Akad Nikah</h3>
-                            <p><i class="fas fa-calendar"></i> Sabtu, 15 Juni 2024</p>
-                            <p><i class="fas fa-clock"></i> 08.00 - 10.00 WIB</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Tangkluk Jatiharjo Jatipuro</p>
-                        </div>
-                    </div>
-                    <div class="event-item">
-                        <div class="event-icon">
-                            <i class="fas fa-glass-cheers"></i>
-                        </div>
-                        <div class="event-info">
-                            <h3>Resepsi</h3>
-                            <p><i class="fas fa-calendar"></i> Sabtu, 15 Juni 2024</p>
-                            <p><i class="fas fa-clock"></i> 11.00 - 15.00 WIB</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Tangkluk Jatiharjo Jatipuro</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Countdown Timer -->
-                <div class="countdown-timer">
-                    <h3>Menuju Hari Bahagia</h3>
-                    <div class="countdown" id="countdown">
-                        <div class="time-unit">
-                            <span id="days">00</span>
-                            <label>Hari</label>
-                        </div>
-                        <div class="time-unit">
-                            <span id="hours">00</span>
-                            <label>Jam</label>
-                        </div>
-                        <div class="time-unit">
-                            <span id="minutes">00</span>
-                            <label>Menit</label>
-                        </div>
-                        <div class="time-unit">
-                            <span id="seconds">00</span>
-                            <label>Detik</label>
-                        </div>
-                    </div>
-                </div>
+/* Music Control */
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
 
-                <!-- Map -->
-                <div class="map-container">
-                    <h3>Lokasi Acara</h3>
-                    <div class="map-embed">
-                        <iframe src="https://maps.app.goo.gl/XqJtiFXv8d6k9nsN7" 
-                                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
+.music-control:hover {
+    background: rgba(232, 184, 109, 0.9);
+    transform: scale(1.1);
+}
 
-        <!-- Gallery Section -->
-        <section class="gallery-section">
-            <div class="container">
-                <h2 class="section-title">Gallery</h2>
-                <p class="gallery-subtitle">Foto mengingat lebih daripada ingatan kita</p>
-                <div class="gallery-grid" id="galleryGrid">
-                    <!-- Gallery items will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
+.music-control i {
+    font-size: 18px;
+    color: #2C3E50;
+}
 
-        <!-- RSVP Section -->
-        <section class="rsvp-section">
-            <div class="container">
-                <h2 class="section-title">Konfirmasi Kehadiran</h2>
-                <form class="rsvp-form" id="rsvpForm">
-                    <div class="form-group">
-                        <label for="rsvpName">Nama Lengkap</label>
-                        <input type="text" id="rsvpName" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="attendance">Kehadiran</label>
-                        <select id="attendance" name="attendance" required>
-                            <option value="">Pilih kehadiran</option>
-                            <option value="hadir">Hadir</option>
-                            <option value="tidak-hadir">Tidak Hadir</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guestCount">Jumlah Tamu</label>
-                        <select id="guestCount" name="guestCount">
-                            <option value="1">1 Orang</option>
-                            <option value="2">2 Orang</option>
-                            <option value="3">3 Orang</option>
-                            <option value="4">4 Orang</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Pesan & Doa</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Berikan pesan dan doa terbaik untuk kami..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Kirim Konfirmasi</button>
-                </form>
-            </div>
-        </section>
+.music-control.playing i {
+    animation: pulse 1.5s infinite;
+}
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <p class="thank-you">Terima kasih atas doa dan kehadiran Anda</p>
-                    <div class="couple-signature">
-                        <p>Triska & Vicky</p>
-                    </div>
-                    
-                    <!-- PEPSINVITE BRANDING - LOGO SECTION START -->
-                    <!-- 
-                        INSTRUKSI PENGGANTIAN LOGO:
-                        1. Ganti src="logo-pepsinvite.png" dengan path logo Anda
-                        2. Ganti alt="Pepsinvite Logo" dengan deskripsi logo Anda
-                        3. Sesuaikan ukuran logo di CSS jika diperlukan
-                    -->
-                    <div class="branding">
-                        <p class="powered-by">Powered by</p>
-                        <div class="logo-container">
-                            <img src="logo-pepsinvite.png" alt="Pepsinvite Logo" class="pepsinvite-logo" id="pepsinviteLogo">
-                            <span class="brand-name">Pepsinvite</span>
-                        </div>
-                    </div>
-                    <!-- PEPSINVITE BRANDING - LOGO SECTION END -->
-                </div>
-            </div>
-        </footer>
-    </div>
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
 
-    <!-- Lightbox for Gallery -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <span class="close-lightbox" id="closeLightbox">&times;</span>
-            <img src="" alt="Gallery Image" id="lightboxImage">
-            <div class="lightbox-nav">
-                <button class="nav-btn prev-btn" id="prevBtn">&#8249;</button>
-                <button class="nav-btn next-btn" id="nextBtn">&#8250;</button>
-            </div>
-        </div>
-    </div>
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)),
+                url('/home/ubuntu/upload/search_images/EUTAFgIcc4Dj.jpg') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
 
-    <!-- Audio Element for Background Music -->
-    <audio id="backgroundMusic" loop>
-        <source src="wedding-music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(44, 62, 80, 0.8), rgba(232, 184, 109, 0.3));
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 0 20px;
+}
 
+.invitation-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.couple-names {
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1s forwards;
+}
+
+.bride-name, .groom-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    font-weight: 700;
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.ampersand {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin: 0 1rem;
+    opacity: 0.8;
+}
+
+.wedding-date {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1.5s forwards;
+}
+
+.guest-name {
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 2s forwards;
+}
+
+.guest-name p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.guest-name h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #E8B86D;
+}
+
+.open-invitation {
+    background: linear-gradient(45deg, #E8B86D, #D4A574);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeInUp 1s ease 2.5s forwards;
+}
+
+.open-invitation:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(232, 184, 109, 0.4);
+}
+
+/* Main Content */
+.main-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.main-content.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Section Styles */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2C3E50;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(45deg, #E8B86D, #D4A574);
+    border-radius: 2px;
+}
+
+/* Couple Section */
+.couple-section {
+    padding: 80px 0;
+    background: #F8F9FA;
+}
+
+.couple-info {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 3rem;
+    align-items: center;
+    text-align: center;
+}
+
+.couple-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 5px solid #E8B86D;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.couple-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bride-info h3, .groom-info h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #2C3E50;
+    margin-bottom: 1rem;
+}
+
+.couple-divider {
+    font-size: 2rem;
+    color: #E8B86D;
+}
+
+/* Event Section */
+.event-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.event-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.event-item {
+    background: #F8F9FA;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.event-item:hover {
+    transform: translateY(-5px);
+}
+
+.event-icon {
+    font-size: 3rem;
+    color: #E8B86D;
+    margin-bottom: 1rem;
+}
+
+.event-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #2C3E50;
+}
+
+.event-info p {
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.event-info i {
+    color: #E8B86D;
+    margin-right: 0.5rem;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.countdown-timer h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #2C3E50;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.time-unit {
+    background: linear-gradient(45deg, #E8B86D, #D4A574);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    min-width: 100px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(232, 184, 109, 0.3);
+}
+
+.time-unit span {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.time-unit label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Map */
+.map-container {
+    text-align: center;
+}
+
+.map-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #2C3E50;
+}
+
+.map-embed {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Gallery Section */
+.gallery-section {
+    padding: 80px 0;
+    background: #F8F9FA;
+}
+
+.gallery-subtitle {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* RSVP Section */
+.rsvp-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.rsvp-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #F8F9FA;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #2C3E50;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #E0E0E0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #E8B86D;
+}
+
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(45deg, #E8B86D, #D4A574);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(232, 184, 109, 0.4);
+}
+
+/* Footer */
+.footer {
+    background: #2C3E50;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.thank-you {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.couple-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #E8B86D;
+}
+
+/* Pepsinvite Branding */
+.branding {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+.powered-by {
+    font-size: 0.9rem;
+    color: #BDC3C7;
+    margin-bottom: 0.5rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.pepsinvite-logo {
+    height: 30px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.brand-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #E8B86D;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.close-lightbox:hover {
+    color: #E8B86D;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(232, 184, 109, 0.8);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .invitation-title {
+        font-size: 2rem;
+    }
+    
+    .bride-name, .groom-name {
+        font-size: 2.5rem;
+    }
+    
+    .guest-name h2 {
+        font-size: 2rem;
+    }
+    
+    .couple-info {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .couple-divider {
+        order: 2;
+    }
+    
+    .groom-info {
+        order: 3;
+    }
+    
+    .event-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .countdown {
+        gap: 1rem;
+    }
+    
+    .time-unit {
+        min-width: 80px;
+        padding: 1rem;
+    }
+    
+    .time-unit span {
+        font-size: 1.5rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .rsvp-form {
+        margin: 0 20px;
+        padding: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 0 15px;
+    }
+    
+    .invitation-title {
+        font-size: 1.8rem;
+    }
+    
+    .bride-name, .groom-name {
+        font-size: 2rem;
+    }
+    
+    .couple-photo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    
+    .gallery-item img {
+        height: 200px;
+    }
+}
+.map-embed {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 25%; /* 4:1 aspect ratio */
+}
+.map-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
